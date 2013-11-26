@@ -17,7 +17,7 @@ function overwrite_author_settings_page_callback( $args = '' ) {
         ?>
         <div id="<?php echo $options_key; ?>" class="wrap">
             <?php screen_icon( 'options-general' ); ?>
-			<h2><?php echo esc_html( $title ); ?></h2>
+    		<h2><?php echo esc_html( $title ); ?></h2>
 			<form method="post" action="options.php">
 				<?php
 					settings_fields( 'overwrite_author_option_group' );
@@ -44,14 +44,6 @@ add_action('admin_init', 'overwrite_plugin_intialize_options' );
 
 function overwrite_plugin_intialize_options() {  
 
-    if ( get_option( 'overwrite_author_update_request' )) {
-        
-            update_option( 'overwrite_author_update_request', '' );
-            //help_do_on_activation();
-            
-    }
-
-
 	register_setting(  
 		'overwrite_author_option_group',  		// A settings group 
 		'overwrite_author_option'   ,  		 
@@ -77,7 +69,16 @@ function overwrite_plugin_intialize_options() {
 		'overwrite_author_general'  						
 	); 
 
+    add_settings_field(   
+    	'selected_post_types',                 	
+		'Enforce Post Types:',             				
+		'settings_field_selected_post_types', 
+		OAN_SETTINGS_PAGE,   						
+		'overwrite_author_general'  						
+	); 
+    
 
+    
 } // end overwrite_plugin_intialize_options()
 
 function overwrite_author_general_section_callback() {  
@@ -86,9 +87,11 @@ function overwrite_author_general_section_callback() {
     echo '<p>Select the User name to overwrite the author during any post/page save. </p>'; 
 
 
-} // end help_note_post_types_section_callback  
+} 
 
-
+/**
+ * Renders settings field for Post Types
+ */
 function settings_field_selected_author() {
 	// First, we read the option collection  
 	$options = get_option('overwrite_author_option');  
@@ -98,7 +101,9 @@ function settings_field_selected_author() {
 
 
     <form action="<?php bloginfo('url'); ?>" method="get">
-    <?php wp_dropdown_users(array('name' => 'author',
+    <?php wp_dropdown_users(array(
+                                'show_option_none' => __( "- None -" ), 
+								'name' => 'author',
                                 'orderby ' => 'display_name', 
                                 'echo'          => 1,
                 				'selected'     => $options['selected_author'],
@@ -108,17 +113,50 @@ function settings_field_selected_author() {
     
 
 
-	<?php
+	<?php 
 }
+
+
+/**
+ * Renders settings field for Post Types
+ */
+function settings_field_selected_post_types() {
+
+
+    // First, we read the option collection  
+	$options = get_option('overwrite_author_option');  
+	  
+      
+    /* Only add the meta box if the current user has the 'restrict_content' capability. */
+	if ( current_user_can( 'manage_options' ) ) {
+
+		/* Get all available public post types. */
+		$post_types = get_post_types( array( 'public' => true ), 'objects' );
+        
+        /* Loop through each post type, adding to the settings */
+        foreach ( $post_types as $post_type ) {
+           
+           // Render the output  
+        	?> 
+    		<input 
+    			type='checkbox'  
+    			id="<?php echo $post_type->name ; ?>" 
+    			name="overwrite_author_option[overwrite_post_types][]"  
+    			value="<?php echo $post_type->name; ?>"<?php checked( in_array( $post_type->name, (array) $options['overwrite_post_types']) ); ?>
+    		</input>
+            
+    	    <?php echo $post_type->labels->name." (". $post_type->name .") <br />";		
+
+        }
+    }
+}
+
 
 function sanitize_overwrite_author_option( $settings ) {  
 
-	// set the flag to flush the Permalink rules on save of the settings.
-	update_option( 'overwrite_author_update_request', '1' );
 
-    
 	// option must be safe
-	//$settings['help_note_post_types'] = isset( $settings['help_note_post_types'] ) ? (array) $settings['help_note_post_types'] : array();
+	$settings['overwrite_post_types'] = isset( $settings['overwrite_post_types'] ) ? (array) $settings['overwrite_post_types'] : array();
 
 
 	return $settings;

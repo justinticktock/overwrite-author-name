@@ -1,7 +1,7 @@
 <?php
 /**
 Plugin Name: Overwrite Author Name
-Plugin URI: http://justinandco.com/justinsblog/role-based-help-notes/
+Plugin URI: http://justinandco.com/overwrite_author_option/
 Description: Overwrite Author Name to ensure on save a users name will be replaced, this allows the site to have a consistent authorship albeit content provided by multiple authors.
 Version: 1.0
 Author: Justin Fletcher
@@ -28,6 +28,10 @@ define( 'OAN_SETTINGS_PAGE', 'overwrite-author-name-settings');
 
 /* Includes... */
 
+// register 
+require_once( OAN_PLUGINNAME_PATH . 'includes/register.php' );  
+
+
 // settings 
 require_once( OAN_PLUGINNAME_PATH . 'includes/settings.php' );  
 
@@ -41,29 +45,30 @@ function overwrite_author_name($post_id) {
     $options = get_option('overwrite_author_option');  
     $enforced_author = $options[selected_author];  
     
-   // $enforced_author = 7797;  
+    if ( $enforced_author ) {
     
-    // this is the post types to have an enforced username.
-   $author_post_types = array('post', 'page');
-    
-    if ($parent_id = wp_is_post_revision($post_id)) 
-        $post_id = $parent_id;
-    
-    $post = get_post( $post_id );
+    	// this is the post types to have an enforced username.
+	    $author_post_types = array('post', 'page');
+		
+		if ($parent_id = wp_is_post_revision($post_id)) 
+			$post_id = $parent_id;
+		
+		$post = get_post( $post_id );
 
-    if (( $post->post_author != $enforced_author ) && (in_array($post->post_type, $author_post_types))) {
-        
-        // unhook this function so it doesn't loop infinitely due to the use of save_post within overwrite_author_name
-        remove_action('save_post', 'overwrite_author_name');
-        
-        // update the post, which calls save_post again
-        //wp_update_post(array('ID' => $post_id, 'post_author' => $enforced_author, 'post_type' => $enforced_author));
-        wp_update_post(array('ID' => $post_id, 'post_author' => $enforced_author));
-        
-    	// re-hook this function
-		add_action('save_post', 'overwrite_author_name');
-    
-    }
+		if (( $post->post_author != $enforced_author ) && (in_array($post->post_type, $author_post_types))) {
+			
+			// unhook this function so it doesn't loop infinitely due to the use of save_post within overwrite_author_name
+			remove_action('save_post', 'overwrite_author_name');
+			
+			// update the post, which calls save_post again
+			//wp_update_post(array('ID' => $post_id, 'post_author' => $enforced_author, 'post_type' => $enforced_author));
+			wp_update_post(array('ID' => $post_id, 'post_author' => $enforced_author));
+			
+			// re-hook this function
+			add_action('save_post', 'overwrite_author_name');
+		
+		}
+	}
 
 }
 
