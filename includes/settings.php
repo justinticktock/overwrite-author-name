@@ -1,6 +1,5 @@
 <?php
 
-
 // Create a second level settings page
 add_action('admin_menu', 'register_overwrite_author_name_settings_page');
 
@@ -29,9 +28,6 @@ function overwrite_author_settings_page_callback( $args = '' ) {
 		<?php
 	}  // end settings_page_content  
 
-
-
-
 /** 
  * Initializes the plugin's option by registering the Sections, 
  * Fields, and Settings. 
@@ -41,7 +37,6 @@ function overwrite_author_settings_page_callback( $args = '' ) {
  
 add_action('admin_init', 'overwrite_plugin_intialize_options' );  
 
-
 function overwrite_plugin_intialize_options() {  
 
 	register_setting(  
@@ -50,9 +45,6 @@ function overwrite_plugin_intialize_options() {
 		'sanitize_overwrite_author_option'  	
 	);  
 
-
-    // General Settings..
-    
      add_settings_section(
 		'overwrite_author_general',        			    
 		'General',            	                  
@@ -60,7 +52,6 @@ function overwrite_plugin_intialize_options() {
 		OAN_SETTINGS_PAGE      					  
 	);  
        
-
     add_settings_field(   
 		'selected_author',                 	
 		'Enforce Author:',             				
@@ -77,16 +68,12 @@ function overwrite_plugin_intialize_options() {
 		'overwrite_author_general'  						
 	); 
     
-
-    
 } // end overwrite_plugin_intialize_options()
 
 function overwrite_author_general_section_callback() {  
 
-
     echo '<p>Select the User name to overwrite the author during any post/page save. </p>'; 
-
-
+	
 } 
 
 /**
@@ -98,8 +85,6 @@ function settings_field_selected_author() {
 
 	// Render the output  
 	?> 
-
-
     <form action="<?php bloginfo('url'); ?>" method="get">
     <?php wp_dropdown_users(array(
                                 'show_option_none' => __( "- None -" ), 
@@ -110,23 +95,17 @@ function settings_field_selected_author() {
             					'name'          => 'overwrite_author_option[selected_author]'
             				    )); ?>
     </form>
-    
-
-
 	<?php 
 }
-
 
 /**
  * Renders settings field for Post Types
  */
 function settings_field_selected_post_types() {
 
-
     // First, we read the option collection  
 	$options = get_option('overwrite_author_option');  
 	  
-      
     /* Only add the meta box if the current user has the 'restrict_content' capability. */
 	if ( current_user_can( 'manage_options' ) ) {
 
@@ -151,19 +130,13 @@ function settings_field_selected_post_types() {
     }
 }
 
-
 function sanitize_overwrite_author_option( $settings ) {  
-
 
 	// option must be safe
 	$settings['overwrite_post_types'] = isset( $settings['overwrite_post_types'] ) ? (array) $settings['overwrite_post_types'] : array();
 
-
 	return $settings;
 	
 }
-
-
-
 
 ?>

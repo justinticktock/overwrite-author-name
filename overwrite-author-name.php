@@ -31,10 +31,8 @@ define( 'OAN_SETTINGS_PAGE', 'overwrite-author-name-settings');
 // register 
 require_once( OAN_PLUGINNAME_PATH . 'includes/register.php' );  
 
-
 // settings 
 require_once( OAN_PLUGINNAME_PATH . 'includes/settings.php' );  
-
 
 // this function makes all posts saved authored by a single user name as defined on the settings page.
 add_action('save_post', 'overwrite_author_name');
@@ -66,13 +64,9 @@ function overwrite_author_name($post_id) {
 			
 			// re-hook this function
 			add_action('save_post', 'overwrite_author_name');
-		
 		}
 	}
-
 }
-
-
 
 // Add settings page to the admin acitve plugin listing
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'overwrite_author_name_action_links' );
