@@ -15,7 +15,8 @@ Are you currently giving multiple users the same login details?  If 'yes' then '
 
 Overwrite Author Name is a plugin to ensure on save of a post the author name will be replaced. This allows the site to have a consistent/clean authorship and protects individual users from leaving their user-name as author.  This is important as users can then login with their own user-name/password using capabilities allocated, however, published content will have a corporate author name.
 
-Overwrite Author Name [Plugin site](http://justinandco.com/justinsblog/overwrite-author-name/).  	
+[Plugin site](http://justinandco.com/plugins/overwrite-author-name/).  	
+[GitHub page](https://github.com/justinticktock/overwrite-author-name).
 
 == Installation ==
 

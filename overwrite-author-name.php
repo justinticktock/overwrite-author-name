@@ -1,7 +1,7 @@
 <?php
 /**
 Plugin Name: Overwrite Author Name
-Plugin URI: http://justinandco.com/overwrite_author_option/
+Plugin URI: http://justinandco.com/plugins/overwrite-author-name/
 Description: Overwrite Author Name to ensure on save a users name will be replaced, this allows the site to have a consistent authorship albeit content provided by multiple authors.
 Version: 1.0
 Author: Justin Fletcher
