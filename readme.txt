@@ -11,7 +11,9 @@ Overwrite Author on save to a consistent name.
 
 == Description ==
 
-Overwrite Author Name is a plugin to ensure on save of a post a user name will be replaced. This allows the site to have a consistent authorship and protects from individual users from leaving their name as author.  This is important as users can then login with their own username/password using capabilities allocated, however, content will have a corporate author name.
+Are you currently giving multiple users the same login details?  If 'yes' then 'Overwrite Author Name' is for you.
+
+Overwrite Author Name is a plugin to ensure on save of a post the author name will be replaced. This allows the site to have a consistent/clean authorship and protects individual users from leaving their user-name as author.  This is important as users can then login with their own user-name/password using capabilities allocated, however, published content will have a corporate author name.
 
 Overwrite Author Name [Plugin site](http://justinandco.com/justinsblog/overwrite-author-name/).  	
 
@@ -19,7 +21,7 @@ Overwrite Author Name [Plugin site](http://justinandco.com/justinsblog/overwrite
 
 1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Goto the "Settings" page, select the user name to replace others.
+3. Goto "Settings".."Overwrite Author" Settings page, select the user name to replace others.
 
 == Frequently Asked Questions ==
 
@@ -34,7 +36,7 @@ The standard wordpress capabilities define if you can edit a post/page once you 
 == Changelog ==
 
 = 1.0 =
-* 2013-??-??
+* 2013-11-28
 * First release 
 
 == Upgrade Notice ==

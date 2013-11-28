@@ -15,6 +15,6 @@ function overwrite_author_name_do_on_activation() {
 
 }
 
-register_activation_hook( HELP_MYPLUGINNAME_PATH.'overwrite-author-name.php', 'overwrite_author_name_do_on_activation' );
+register_activation_hook( OAN_PLUGINNAME_PATH.'overwrite-author-name.php', 'overwrite_author_name_do_on_activation' );
 
 ?>
