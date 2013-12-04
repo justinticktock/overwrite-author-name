@@ -72,7 +72,7 @@ function overwrite_plugin_intialize_options() {
 
 function overwrite_author_general_section_callback() {  
 
-    echo '<p>Select options to customise the overwrite of the author during any post/page save. </p>'; 
+    echo '<p>Select options to customise the overwrite of the author name during publishing a post/page. </p>'; 
 	
 } 
 
