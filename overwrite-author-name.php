@@ -3,7 +3,7 @@
 Plugin Name: Overwrite Author Name
 Plugin URI: http://justinandco.com/plugins/overwrite-author-name/
 Description: Overwrite Author Name to ensure on publish a users name will be replaced, this allows the site to have a consistent authorship albeit content provided by multiple authors.
-Version: 1.1
+Version: 1.2
 Author: Justin Fletcher
 Author URI: http://justinandco.com
 License: GPLv2 or later
@@ -34,8 +34,35 @@ require_once( OAN_PLUGINNAME_PATH . 'includes/register.php' );
 // settings 
 require_once( OAN_PLUGINNAME_PATH . 'includes/settings.php' );  
 
+
+add_action('init', 'overwrite_author_name_active_post_types');
+
 // this function makes all posts published by a single user name as defined on the settings page.
-add_action('publish_post', 'overwrite_author_name');
+function overwrite_author_name_active_post_types() {
+    
+	// this is the username ID to be enforced.
+    $options = get_option('overwrite_author_option');  
+    $enforced_author = $options['selected_author'];  
+   
+    if ( $enforced_author ) {
+    
+        // this is the post types to have an enforced username.
+	    $author_post_types =  $options['overwrite_post_types'];
+
+		foreach( $author_post_types as $post_type_name )
+		{
+			if ( $post_type_name != "attachment" ) {
+				add_action("publish_{$post_type_name}", 'overwrite_author_name');
+				//echo "add_action(publish_{" . $post_type_name. "}, 'overwrite_author_name')</BR>";	
+			} else {
+				// edit_attachment hook needed for the attachment post type.
+				add_action("edit_attachment", 'overwrite_author_name');
+				//echo "add_action(publish_{" . $post_type_name. "}, 'overwrite_author_name')</BR>";
+			}
+			
+		}
+	}
+}
 
 function overwrite_author_name($post_id) {
     
@@ -54,7 +81,6 @@ function overwrite_author_name($post_id) {
 		$post = get_post( $post_id );
 
 		if (( $post->post_author != $enforced_author ) && (in_array($post->post_type, $author_post_types))) {
-			
 			// update the post, which calls publish_post again
 			wp_update_post(array('ID' => $post_id, 'post_author' => $enforced_author));
 			
