@@ -3,7 +3,7 @@ Contributors: justinticktock
 Tags: author, enforce, overwrite, publish
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,7 +41,7 @@ The standard wordpress capabilities define if you can edit a post/page once you 
 
 = 1.2 =
 * 2013-12-12
-* fixed the 'publish_post' action hook for post, page and all custom post types
+* fixed the 'publish_post' action hook for page and all custom post types
 * attachment post type is now on the 'edit_attachment' hook
 
 = 1.1 =
