@@ -3,7 +3,7 @@ Contributors: justinticktock
 Tags: author, enforce, overwrite, publish
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,6 +38,11 @@ The standard wordpress capabilities define if you can edit a post/page once you 
 1. The Settings Screen.
 
 == Changelog ==
+
+
+= 1.3 =
+* 2014-01-02
+* New feature: Made ready for translation.
 
 = 1.2 =
 * 2013-12-12

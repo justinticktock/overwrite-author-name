@@ -3,7 +3,7 @@
 Plugin Name: Overwrite Author Name
 Plugin URI: http://justinandco.com/plugins/overwrite-author-name/
 Description: Overwrite Author Name to ensure on publish a users name will be replaced, this allows the site to have a consistent authorship albeit content provided by multiple authors.
-Version: 1.2
+Version: 1.3
 Author: Justin Fletcher
 Author URI: http://justinandco.com
 License: GPLv2 or later
@@ -34,7 +34,6 @@ require_once( OAN_PLUGINNAME_PATH . 'includes/register.php' );
 // settings 
 require_once( OAN_PLUGINNAME_PATH . 'includes/settings.php' );  
 
-
 add_action('init', 'overwrite_author_name_active_post_types');
 
 // this function makes all posts published by a single user name as defined on the settings page.
@@ -62,6 +61,8 @@ function overwrite_author_name_active_post_types() {
 			
 		}
 	}
+	
+	load_plugin_textdomain('overwrite-author-text-domain', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 
 function overwrite_author_name($post_id) {
@@ -92,7 +93,7 @@ function overwrite_author_name($post_id) {
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'overwrite_author_name_action_links' );
 
 function overwrite_author_name_action_links( $links ) {
-    array_unshift( $links, '<a href="options-general.php?page=' . OAN_SETTINGS_PAGE . '">' . __( 'Settings' ) . "</a>" );
+    array_unshift( $links, '<a href="options-general.php?page=' . OAN_SETTINGS_PAGE . '">' . __( 'Settings', 'overwrite-author-text-domain' ) . "</a>" );
     return $links;
 }
 

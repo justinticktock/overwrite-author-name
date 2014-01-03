@@ -9,7 +9,7 @@ function register_overwrite_author_name_settings_page() {
 
 function overwrite_author_settings_page_callback( $args = '' ) {
         extract( wp_parse_args( $args, array(
-            'title'       => __( 'Overwrite Author Settings' ),
+            'title'       => __( 'Overwrite Author Settings', 'oan-text-domain'),
             'options_group' => 'overwrite_author_option_group',
             'options_key' => 'overwrite_author_option'
         ) ) );
@@ -72,7 +72,7 @@ function overwrite_plugin_intialize_options() {
 
 function overwrite_author_general_section_callback() {  
 
-    echo '<p>Select options to customise the overwrite of the author name during publishing a post/page. </p>'; 
+    echo "<p>" . _e( "Select options to customise the overwrite of the author name during publishing a post/page.", 'overwrite-author-text-domain') . "</p> " ;
 	
 } 
 
@@ -87,7 +87,7 @@ function settings_field_selected_author() {
 	?> 
     <form action="<?php bloginfo('url'); ?>" method="get">
     <?php wp_dropdown_users(array(
-                                'show_option_none' => __( "- None -" ), 
+                                'show_option_none' => __( "- None -", 'overwrite-author-text-domain'), 
 								'name' => 'author',
                                 'orderby ' => 'display_name', 
                                 'echo'          => 1,
@@ -129,8 +129,7 @@ function settings_field_selected_post_types() {
            }
         }
         
-        ?><p>&nbsp&nbsp(Only post types with 'author' support are listed). </BR> 
-        <?php         
+        ?><p><?php _e("(Only post types with 'author' support are listed)", 'overwrite-author-text-domain') ?>. </BR> <?php 
     }
 }
 
