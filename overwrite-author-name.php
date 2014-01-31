@@ -3,28 +3,15 @@
 Plugin Name: Overwrite Author Name
 Plugin URI: http://justinandco.com/plugins/overwrite-author-name/
 Description: Overwrite Author Name to ensure on publish a users name will be replaced, this allows the site to have a consistent authorship albeit content provided by multiple authors.
-Version: 1.3
+Version: 1.4
 Author: Justin Fletcher
 Author URI: http://justinandco.com
 License: GPLv2 or later
-Copyright 2013  (email : justin@justinandco.com)
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
-published by the Free Software Foundation.
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 // Define constants
 define( 'OAN_PLUGINNAME_PATH', plugin_dir_path(__FILE__) );
-define( 'OAN_PLUGIN_URI', plugins_url('', __FILE__) );
 define( 'OAN_SETTINGS_PAGE', 'overwrite-author-name-settings');
-
 
 /* Includes... */
 
@@ -51,14 +38,19 @@ function overwrite_author_name_active_post_types() {
 		foreach( $author_post_types as $post_type_name )
 		{
 			if ( $post_type_name != "attachment" ) {
+			
+				// add to the published post or page actions
 				add_action("publish_{$post_type_name}", 'overwrite_author_name');
-				//echo "add_action(publish_{" . $post_type_name. "}, 'overwrite_author_name')</BR>";	
+				
+				// scheduled posts ...add to the action for post is transitioned from 'future' to 'publish' status
+				add_action('publish_future_post', 'overwrite_author_name');
+				
 			} else {
+			
 				// edit_attachment hook needed for the attachment post type.
 				add_action("edit_attachment", 'overwrite_author_name');
-				//echo "add_action(publish_{" . $post_type_name. "}, 'overwrite_author_name')</BR>";
-			}
-			
+				
+			}	
 		}
 	}
 	

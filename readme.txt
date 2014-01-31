@@ -2,8 +2,8 @@
 Contributors: justinticktock
 Tags: author, enforce, overwrite, publish
 Requires at least: 3.5
-Tested up to: 3.8
-Stable tag: 1.3
+Tested up to: 3.8.1
+Stable tag: 1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,9 +12,10 @@ Overwrite Author to a consistent name when publishing a post.
 == Description ==
 
 Are you currently giving multiple users the same login details?  
-If 'yes' then 'Overwrite Author Name' is for you.
 
 'Overwrite Author Name' is a plugin to ensure when publishing a post the author name will be replaced. This allows the site to have a consistent/clean authorship and protects individual users from leaving their user-name as author.  This is important as users can then login with their own user-name/password using capabilities allocated, however the published content will have a corporate author name against site content.
+
+For increased security the user account used for the corporate identity should also be given minimal access to the site (e.g. the Subscriber role only).  In this way should someone crack the public facing account password, using the user name, they will only gain subscriber access.
 
 supports standard and custom post types.
 
@@ -39,6 +40,9 @@ The standard wordpress capabilities define if you can edit a post/page once you 
 
 == Changelog ==
 
+= 1.4 =
+* 2014-01-31
+* Fix:  Added a missing cases of scheduled posts, author name is now correctly overwritten when going to the published status.
 
 = 1.3 =
 * 2014-01-02
