@@ -42,7 +42,7 @@ The standard wordpress capabilities define if you can edit a post/page once you 
 
 = 1.4 =
 * 2014-01-31
-* Fix:  Added a missing cases of scheduled posts, author name is now correctly overwritten when going to the published status.
+* Fix:  Added a missing case of scheduled posts, author name is now correctly overwritten when going to the published status.
 
 = 1.3 =
 * 2014-01-02
