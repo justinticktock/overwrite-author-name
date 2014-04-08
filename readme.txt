@@ -3,7 +3,7 @@ Contributors: justinticktock
 Tags: author, enforce, overwrite, publish
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 1.4
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,10 @@ The standard wordpress capabilities define if you can edit a post/page once you 
 1. The Settings Screen.
 
 == Changelog ==
+
+= 1.5 =
+* 2014-01-??
+* Fix:  Updated to catch private posts being published or scheduled.
 
 = 1.4 =
 * 2014-01-31
