@@ -1,9 +1,9 @@
 === Plugin Name ===
-Contributors: justinticktock
+Contributors: justinticktock, keycapability
 Tags: author, enforce, overwrite, publish
 Requires at least: 3.5
 Tested up to: 4.9
-Stable tag: 1.5
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,8 +19,15 @@ For increased security the user account used for the corporate identity should a
 
 supports standard and custom post types.
 
-[Plugin site](http://justinandco.com/plugins/overwrite-author-name/).  	
-[GitHub page](https://github.com/justinticktock/overwrite-author-name).
+
+
+= Plugin site =
+
+http://justinandco.com/plugins/overwrite-author-name/
+
+= GitHub - Development =
+
+https://github.com/justinticktock/overwrite-author-name
 
 == Installation ==
 
@@ -40,30 +47,9 @@ The standard wordpress capabilities define if you can edit a post/page once you 
 
 == Changelog ==
 
-= 1.5 =
-* 2014-05-30
-* Fix:  Updated to catch private posts being published or scheduled.
+Change log is maintained on [the plugin website]( https://justinandco.com/plugins/overwrite-author-name-change-log/ "Overwrite Author Name Plugin Changelog" )
 
-= 1.4 =
-* 2014-01-31
-* Fix:  Added a missing case of scheduled posts, author name is now correctly overwritten when going to the published status.
-
-= 1.3 =
-* 2014-01-02
-* New feature: Made ready for translation.
-
-= 1.2 =
-* 2013-12-12
-* fixed the 'publish_post' action hook for page and all custom post types
-* attachment post type is now on the 'edit_attachment' hook
-
-= 1.1 =
-* 2013-12-04
-* Changed the hook to the 'publish_post' action hook, this is so that contributors can continue to edit/save their draft content until the post is finally published.
-
-= 1.0 =
-* 2013-11-28
-* First release 
 
 == Upgrade Notice ==
-
+= 1.6 =
+Check your settings are this upgrade.

@@ -1,12 +1,14 @@
 <?php
 
 //if uninstall not called from WordPress exit
-if ( !defined( 'WP_UNINSTALL_PLUGIN' ) )
+if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit ();
+}
 	
 if (is_multisite()) {
-    global $wpdb;
-    $blogs = $wpdb->get_results("SELECT blog_id FROM {$wpdb->blogs}", ARRAY_A);
+
+    $blogs = wp_list_pluck( wp_get_sites(), 'blog_id' );
+
     if ($blogs) {
         foreach($blogs as $blog) {
             switch_to_blog($blog['blog_id']);
